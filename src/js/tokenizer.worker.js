@@ -7,6 +7,7 @@
  * typing never paints a stale count over a newer one.
  */
 
+import { isAtypical } from './estimate.js';
 import { codePoints, countWith, loadEncoder } from './tokenizer.js';
 
 self.onmessage = async ({ data }) => {
@@ -20,8 +21,12 @@ self.onmessage = async ({ data }) => {
       for (const [key, text] of Object.entries(parts)) counts[name][key] = countWith(encoder, text);
     }
     const chars = {};
-    for (const [key, text] of Object.entries(parts)) chars[key] = codePoints(text);
-    self.postMessage({ id, counts, chars, ms: performance.now() - started });
+    const atypical = {};
+    for (const [key, text] of Object.entries(parts)) {
+      chars[key] = codePoints(text);
+      atypical[key] = isAtypical(text);
+    }
+    self.postMessage({ id, counts, chars, atypical, ms: performance.now() - started });
   } catch (error) {
     self.postMessage({ id, error: String(error?.message ?? error) });
   }
