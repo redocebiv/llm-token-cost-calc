@@ -1,0 +1,13 @@
+## Quarterly results
+
+| Region        | Revenue ($m) | Margin | YoY   |
+|---------------|-------------:|-------:|------:|
+| Kazakhstan    |        142.6 |  18.4% | +9.1% |
+| Uzbekistan    |         61.3 |  12.2% | +4.7% |
+| Kyrgyzstan    |         18.9 |   9.8% | -1.3% |
+| **Total**     |    **222.8** | 15.9%  | +6.8% |
+
+> Figures are unaudited. Margin is operating margin; YoY compares to Q3 last year.
+
+- [x] Reconcile FX adjustments
+- [ ] Confirm the Kyrgyzstan write-down with audit

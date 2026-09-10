@@ -1,0 +1,16 @@
+{
+  "request_id": "req_01J9ZK4Q8M2X7",
+  "model": "gpt-5.6-terra",
+  "usage": {
+    "input_tokens": 12840,
+    "cached_input_tokens": 11264,
+    "output_tokens": 912,
+    "reasoning_tokens": 384
+  },
+  "messages": [
+    { "role": "system", "content": "You are a careful financial analyst." },
+    { "role": "user", "content": "Summarise Q3 margins by region, in a table." }
+  ],
+  "metadata": { "tenant": "acme-kz", "region": "asia-central", "retry": false, "tags": ["finance", "q3", null] },
+  "latency_ms": 2381.5
+}

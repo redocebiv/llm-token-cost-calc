@@ -1,0 +1,24 @@
+// Debounce keystrokes so the tokenizer only runs once typing pauses.
+export function debounce(fn, wait = 150) {
+  let timer = 0;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), wait);
+  };
+}
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 6,
+});
+
+export const money = (value) => (value < 0.01 ? `$${value.toFixed(6)}` : formatter.format(value));
+
+document.querySelector('#prompt')?.addEventListener(
+  'input',
+  debounce(async (event) => {
+    const { count } = await worker.count(event.target.value);
+    document.querySelector('#tokens').textContent = count.toLocaleString();
+  }),
+);

@@ -1,0 +1,20 @@
+-- Monthly spend per model, most expensive first.
+WITH usage AS (
+    SELECT
+        date_trunc('month', created_at) AS month,
+        model_id,
+        SUM(prompt_tokens)     AS prompt_tokens,
+        SUM(completion_tokens) AS completion_tokens
+    FROM api_requests
+    WHERE created_at >= NOW() - INTERVAL '6 months'
+      AND status = 'succeeded'
+    GROUP BY 1, 2
+)
+SELECT
+    u.month,
+    u.model_id,
+    ROUND((u.prompt_tokens * p.input_per_million
+         + u.completion_tokens * p.output_per_million) / 1e6, 2) AS usd
+FROM usage u
+JOIN model_prices p USING (model_id)
+ORDER BY u.month DESC, usd DESC;

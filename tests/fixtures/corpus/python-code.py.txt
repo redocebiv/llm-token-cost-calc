@@ -1,0 +1,30 @@
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from pathlib import Path
+
+
+@dataclass(frozen=True)
+class Price:
+    """Per-million-token prices for one model."""
+
+    input: float
+    output: float
+    cached_input: float | None = None
+
+    def cost(self, prompt_tokens: int, output_tokens: int, cached: int = 0) -> float:
+        fresh = prompt_tokens - cached
+        rate_cached = self.cached_input if self.cached_input is not None else self.input
+        return (fresh * self.input + cached * rate_cached + output_tokens * self.output) / 1_000_000
+
+
+def load_prices(path: Path) -> dict[str, Price]:
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    return {row["id"]: Price(**row["price"]) for row in raw["models"]}
+
+
+if __name__ == "__main__":
+    prices = load_prices(Path("models.json"))
+    for model_id, price in sorted(prices.items(), key=lambda kv: kv[1].input):
+        print(f"{model_id:<24} ${price.cost(12_000, 800):.4f}")

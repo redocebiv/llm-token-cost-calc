@@ -1,0 +1,5 @@
+# Only the Python side of the project lives here: the reference fixture
+# generator and its tests. testpaths keeps pytest out of node_modules.
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-q"

@@ -1,0 +1,4 @@
+# The token corpus must reach the tokenizer byte-for-byte. Without this, a
+# core.autocrlf setting rewrites CRLF to LF on commit and the CRLF test cases
+# silently stop testing CRLF.
+tests/fixtures/corpus/** -text
