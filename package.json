@@ -9,7 +9,7 @@
     "test": "node --test tests/unit/*.test.mjs",
     "fixtures": "python3 scripts/make_fixtures.py",
     "e2e": "playwright test",
-    "serve": "python3 -m http.server 4173 -d dist"
+    "serve": "python3 scripts/serve_dist.py 4173"
   },
   "dependencies": {
     "js-tiktoken": "1.0.21"
