@@ -19,6 +19,7 @@ await fs.mkdir(path.join(dist, 'css'), { recursive: true });
 const result = await build({
   entryPoints: {
     app: path.join(src, 'js/app.js'),
+    library: path.join(src, 'js/library.js'),
     'tokenizer.worker': path.join(src, 'js/tokenizer.worker.js'),
   },
   outdir: path.join(dist, 'js'),
@@ -33,7 +34,7 @@ const result = await build({
   logLevel: 'warning',
 });
 
-for (const page of ['index.html']) {
+for (const page of ['index.html', 'prompts.html']) {
   await fs.copyFile(path.join(src, page), path.join(dist, page));
 }
 await fs.copyFile(path.join(src, 'css/style.css'), path.join(dist, 'css/style.css'));
