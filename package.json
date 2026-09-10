@@ -1,0 +1,21 @@
+{
+  "name": "llm-token-cost-calc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Token counts and per-request cost across OpenAI, Anthropic and Google models, with a system-prompt library",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/unit/*.test.mjs",
+    "fixtures": "python3 scripts/make_fixtures.py",
+    "e2e": "playwright test",
+    "serve": "python3 -m http.server 4173 -d dist"
+  },
+  "dependencies": {
+    "js-tiktoken": "1.0.21"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "esbuild": "0.28.2"
+  }
+}
